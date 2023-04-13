@@ -1,0 +1,11 @@
+
+- name: Deploy and change application
+  hosts: localhost
+  tasks:
+    - name: Run deploy.yml
+      ansible.builtin.shell:
+        cmd: ansible-playbook /home/ubuntu/deploy_linux_server.yaml
+
+    - name: Run change.yml
+      ansible.builtin.shell:
+        cmd: ansible-playbook /home/ubuntu/installation.yaml

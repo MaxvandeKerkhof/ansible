@@ -1,0 +1,28 @@
+
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+
+  vars:
+    datacenter_ip: 192.168.104.11
+    folder_name: maxvm
+    template_name: linux_template_max
+
+  tasks:
+    - name: Deploy Linux server in datacenter
+      community.vmware.vmware_guest:
+        hostname: "{{ datacenter_ip }}"
+        username: administrator@infralab.lan
+        password: Obelix@99
+        validate_certs: false
+        datacenter: Datacenter
+        folder: "{{ folder_name }}"
+        name: Webserver1
+        template: "{{ template_name }}"
+        hardware:
+          memory_mb: 2048
+          num_cpus: 2
+          scsi: paravirtual
+        state: poweredon
+        wait_for_ip_address: true
